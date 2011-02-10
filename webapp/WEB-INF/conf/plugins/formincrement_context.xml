@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+ 	 <bean id="taskFormIncrementConfigDAO"  class="fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormIncrementConfigDAO"/>
+ 	 
+ 	 <bean id="workflow-formincrement.taskFormIncrement" class="fr.paris.lutece.plugins.workflow.business.task.TaskType" >
+ 	 		<property name="key" value="taskFormIncrement"/>
+     		 <property name="titleI18nKey" value="module.workflow.formincrement.task_form_increment_title" />
+    		 <property name="className" value="fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormIncrement"/>
+   	  </bean>
+</beans>
+ 	
