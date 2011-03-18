@@ -33,6 +33,12 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.formincrement.business;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+
 import fr.paris.lutece.plugins.directory.business.Record;
 import fr.paris.lutece.plugins.directory.business.RecordHome;
 import fr.paris.lutece.plugins.directory.service.DirectoryPlugin;
@@ -53,15 +59,8 @@ import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
-import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.html.HtmlTemplate;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -261,14 +260,14 @@ public class TaskFormIncrement extends Task
                     }
                     catch ( Exception e )
                     {
-                        AppLogService.error( I18nService.getLocalizedString( MESSAGE_COMPLEMENTARY_INFORMATION_BEGIN,
+                        throw new RuntimeException( I18nService.getLocalizedString( MESSAGE_COMPLEMENTARY_INFORMATION_BEGIN,
                                 locale ) + config.getIdInformationComplementary(  ) +
                             I18nService.getLocalizedString( MESSAGE_COMPLEMENTARY_INFORMATION_END, locale ), e );
                     }
                 }
                 catch ( Exception e )
                 {
-                    AppLogService.error( I18nService.getLocalizedString( MESSAGE_METHOD_NOT_FOUND, locale ) );
+                	throw new RuntimeException( I18nService.getLocalizedString( MESSAGE_METHOD_NOT_FOUND, locale ) );
                 }
             }
         }
