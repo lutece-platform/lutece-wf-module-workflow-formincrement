@@ -48,6 +48,9 @@
 			<type>lutece-plugin</type>
 		</dependency>
 	</dependencies>
+	<properties>
+		<jiraProjectName>MODULEWORKFLOWFORMINCREMENT</jiraProjectName>
+	</properties>
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-formincrement</connection>
         <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-formincrement</developerConnection>
