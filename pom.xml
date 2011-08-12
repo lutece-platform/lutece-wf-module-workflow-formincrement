@@ -50,6 +50,7 @@
 	</dependencies>
 	<properties>
 		<jiraProjectName>MODULEWORKFLOWFORMINCREMENT</jiraProjectName>
+		<jiraComponentId>10380</jiraComponentId>
 	</properties>
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-formincrement</connection>
