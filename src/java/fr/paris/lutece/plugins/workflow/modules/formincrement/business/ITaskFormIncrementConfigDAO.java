@@ -46,41 +46,38 @@ import java.util.List;
 public interface ITaskFormIncrementConfigDAO
 {
     /**
-     * Insere une nouvelle configuration de type evaluation
-     *
-     * @param config l objet configuration
+     * Insert a new configuration
+     * @param config the configuration
      * @param plugin the plugin
      */
     void insert( TaskFormIncrementConfig config, Plugin plugin );
 
     /**
-     * met à jour une configuration de type evaluation
-     *
-     * @param  config instance of config object to update
+     * Update a configuration
+     * @param config the configuration to update
      * @param plugin the plugin
      */
     void store( TaskFormIncrementConfig config, Plugin plugin );
 
     /**
-     * charge une configuration de type evaluation
+     * Load a configuration
      * @param nIdConfig the config id
      * @param plugin the plugin
-     * @return une configuration
-     *
+     * @return a configuration
      */
     TaskFormIncrementConfig load( int nIdConfig, Plugin plugin );
 
     /**
-     * Supprime une configuration de type evaluation
-     * @param nIdConfig l identifiant de la configuration
+     * Delete a configuration
+     * @param nIdConfig the id config
      * @param plugin le plugin
      */
     void delete( int nIdConfig, Plugin plugin );
 
     /**
-     *
+     * Load all configurations
      * @param plugin le plugin
-     * @return List of TaskFormIncrementConfigDAO
+     * @return List of {@link TaskFormIncrementConfig}
      */
     List<TaskFormIncrementConfig> loadAll( Plugin plugin );
 }

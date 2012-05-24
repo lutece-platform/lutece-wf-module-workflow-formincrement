@@ -45,9 +45,8 @@ public class TaskFormIncrementConfig
     private int _nIdInformationComplementary;
 
     /**
-    *
-    * @return id Task
-    */
+     * @return id Task
+     */
     public int getIdTask(  )
     {
         return _nIdTask;
@@ -63,9 +62,8 @@ public class TaskFormIncrementConfig
     }
 
     /**
-    *
-    * @return id Entry directory Email
-    */
+     * @return id Entry directory Email
+     */
     public int getIdInformationComplementary(  )
     {
         return _nIdInformationComplementary;
@@ -73,7 +71,7 @@ public class TaskFormIncrementConfig
 
     /**
      * set id Entry directory Email
-     * @param idEntryDirectoryEmail id of Entry directory Email
+     * @param nIdInformationComplementary id of Entry directory Email
      */
     public void setIdInformationComplementary( int nIdInformationComplementary )
     {

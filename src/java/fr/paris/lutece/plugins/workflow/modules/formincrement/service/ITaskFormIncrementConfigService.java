@@ -31,64 +31,47 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.formincrement.business;
+package fr.paris.lutece.plugins.workflow.modules.formincrement.service;
 
-import fr.paris.lutece.plugins.workflow.modules.formincrement.service.FormIncrementPlugin;
+import fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormIncrementConfig;
 import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.spring.SpringContextService;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 /**
- * TaskFormIncrementConfigHome
+ *
+ * ITaskFormIncrementConfigService
+ *
  */
-public final class TaskFormIncrementConfigHome
+public interface ITaskFormIncrementConfigService
 {
-    // Static variable pointed at the DAO instance
-    private static ITaskFormIncrementConfigDAO _dao = (ITaskFormIncrementConfigDAO) SpringContextService.getPluginBean( FormIncrementPlugin.PLUGIN_NAME,
-            "taskFormIncrementConfigDAO" );
-
     /**
-     * Private constructor - this class need not be instantiated
-     */
-    private TaskFormIncrementConfigHome(  )
-    {
-    }
-
-    /**
-     * Insert new configuration
-     *
-     * @param config object configuration
-     * @param plugin the plugin
-     */
-    public static void create( TaskFormIncrementConfig config, Plugin plugin )
-    {
-        _dao.insert( config, plugin );
-    }
+    * Insert new configuration
+    * @param config object configuration
+    * @param plugin the plugin
+    */
+    @Transactional( "workflow-formincrement.transactionManager" )
+    void create( TaskFormIncrementConfig config, Plugin plugin );
 
     /**
      * Update a configuration
-     *
      * @param config object configuration
      * @param plugin the plugin
      */
-    public static void update( TaskFormIncrementConfig config, Plugin plugin )
-    {
-        _dao.store( config, plugin );
-    }
+    @Transactional( "workflow-formincrement.transactionManager" )
+    void update( TaskFormIncrementConfig config, Plugin plugin );
 
     /**
      * Delete a configuration
      * @param nIdTask id task
      * @param plugin the plugin
      */
-    public static void remove( int nIdTask, Plugin plugin )
-    {
-        _dao.delete( nIdTask, plugin );
-    }
+    @Transactional( "workflow-formincrement.transactionManager" )
+    void remove( int nIdTask, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
@@ -96,25 +79,13 @@ public final class TaskFormIncrementConfigHome
      * @param nIdTask id task
      * @param plugin the plugin
      * @return a configuration
-     *
      */
-    public static TaskFormIncrementConfig findByPrimaryKey( int nIdTask, Plugin plugin )
-    {
-        TaskFormIncrementConfig taskNotifyDirectoryConfig = _dao.load( nIdTask, plugin );
-
-        return taskNotifyDirectoryConfig;
-    }
+    TaskFormIncrementConfig findByPrimaryKey( int nIdTask, Plugin plugin );
 
     /**
      * Load All Directorty
      * @param plugin the plugin
      * @return a configuration
-     *
      */
-    public static List<TaskFormIncrementConfig> getAll( Plugin plugin )
-    {
-        List<TaskFormIncrementConfig> listTaskNotifyDirectoryConfig = _dao.loadAll( plugin );
-
-        return listTaskNotifyDirectoryConfig;
-    }
+    List<TaskFormIncrementConfig> getAll( Plugin plugin );
 }

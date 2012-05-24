@@ -56,10 +56,10 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
     private static final String SQL_QUERY_DELETE = "DELETE FROM task_form_increment_cf WHERE id_task=? ";
     private static final String SQL_QUERY_FIND_ALL = "SELECT id_task,id_information " + "FROM task_form_increment_cf";
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.notifydirectory.business.ITaskNotifyDirectoryConfigDAO#insert(fr.paris.lutece.plugins.workflow.modules.notifydirectory.business.TaskNotifyDirectoryConfig, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public synchronized void insert( TaskFormIncrementConfig config, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
@@ -73,10 +73,10 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
         daoUtil.free(  );
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.notifydirectory.business.ITaskNotifyDirectoryConfigDAO#store(fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.TaskEvaluationExpertConfig, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public void store( TaskFormIncrementConfig config, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
@@ -91,10 +91,10 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
         daoUtil.free(  );
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.notifydirectory.business.ITaskNotifyDirectoryConfigDAO#load(int, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public TaskFormIncrementConfig load( int nIdTask, Plugin plugin )
     {
         TaskFormIncrementConfig config = null;
@@ -118,10 +118,10 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
         return config;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.notifydirectory.business.ITaskNotifyDirectoryConfigDAO#delete(int, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public void delete( int nIdState, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
@@ -131,10 +131,10 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
         daoUtil.free(  );
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.notifydirectory.business.ITaskNotifyDirectoryConfigDAO#load(int, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public List<TaskFormIncrementConfig> loadAll( Plugin plugin )
     {
         List<TaskFormIncrementConfig> configList = new ArrayList<TaskFormIncrementConfig>(  );

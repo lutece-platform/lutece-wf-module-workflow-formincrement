@@ -43,9 +43,5 @@ import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
  */
 public class FormIncrementPlugin extends PluginDefaultImplementation
 {
-    public static final String PLUGIN_NAME = "formincrement";
-
-    public void init(  )
-    {
-    }
+    public static final String PLUGIN_NAME = "workflow-formincrement";
 }
