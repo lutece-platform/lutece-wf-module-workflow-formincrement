@@ -37,8 +37,8 @@ import fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormI
 import fr.paris.lutece.plugins.workflow.modules.formincrement.service.FormIncrementPlugin;
 import fr.paris.lutece.plugins.workflow.modules.formincrement.service.ITaskFormIncrementConfigService;
 import fr.paris.lutece.plugins.workflow.utils.WorkflowUtils;
-import fr.paris.lutece.plugins.workflow.web.task.NoFormTaskComponent;
 import fr.paris.lutece.plugins.workflowcore.service.task.ITask;
+import fr.paris.lutece.plugins.workflowcore.web.task.NoFormTaskComponent;
 import fr.paris.lutece.portal.service.i18n.I18nService;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
