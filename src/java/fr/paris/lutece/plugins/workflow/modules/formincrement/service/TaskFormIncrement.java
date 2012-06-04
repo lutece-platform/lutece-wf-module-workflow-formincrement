@@ -45,6 +45,7 @@ import fr.paris.lutece.plugins.form.service.FormPlugin;
 import fr.paris.lutece.plugins.form.utils.FormUtils;
 import fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormIncrementConfig;
 import fr.paris.lutece.plugins.workflowcore.business.resource.ResourceHistory;
+import fr.paris.lutece.plugins.workflowcore.service.config.ITaskConfigService;
 import fr.paris.lutece.plugins.workflowcore.service.resource.IResourceHistoryService;
 import fr.paris.lutece.plugins.workflowcore.service.task.SimpleTask;
 import fr.paris.lutece.portal.service.i18n.I18nService;
@@ -57,6 +58,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,10 +75,12 @@ public class TaskFormIncrement extends SimpleTask
     private static final String MESSAGE_METHOD_NOT_FOUND = "module.workflow.formincrement.message.information_complementary.method_not_found";
     private static final String FORM_GETTER_INFORMATION_COMPLEMENTARY = "getInfoComplementary";
     private static final String FORM_SETTER_INFORMATION_COMPLEMENTARY = "setInfoComplementary";
+    private static final String BEAN_TASK_CONFIG_SERVICE = "workflow-formincrement.taskFormIncrementConfigService";
 
     // SERVICES
     @Inject
-    private ITaskFormIncrementConfigService _taskFormIncrementConfigService;
+    @Named( BEAN_TASK_CONFIG_SERVICE )
+    private ITaskConfigService _taskFormIncrementConfigService;
     @Inject
     private IResourceHistoryService _resourceHistoryService;
 
@@ -89,8 +93,7 @@ public class TaskFormIncrement extends SimpleTask
         Plugin pluginForm = PluginService.getPlugin( FormPlugin.PLUGIN_NAME );
         Plugin pluginDirectory = PluginService.getPlugin( DirectoryPlugin.PLUGIN_NAME );
         Plugin pluginExportDirectory = PluginService.getPlugin( ExportdirectoryPlugin.PLUGIN_NAME );
-        Plugin plugin = PluginService.getPlugin( FormIncrementPlugin.PLUGIN_NAME );
-        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( this.getId(  ), plugin );
+        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( this.getId(  ) );
         ResourceHistory resourceHistory = _resourceHistoryService.findByPrimaryKey( nIdResourceHistory );
 
         if ( ( config != null ) && ( resourceHistory != null ) )
@@ -155,8 +158,7 @@ public class TaskFormIncrement extends SimpleTask
     @Override
     public void doRemoveConfig(  )
     {
-        _taskFormIncrementConfigService.remove( this.getId(  ),
-            PluginService.getPlugin( FormIncrementPlugin.PLUGIN_NAME ) );
+        _taskFormIncrementConfigService.remove( this.getId(  ) );
     }
 
     /**
@@ -165,8 +167,7 @@ public class TaskFormIncrement extends SimpleTask
     @Override
     public String getTitle( Locale locale )
     {
-        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( this.getId(  ),
-                PluginService.getPlugin( FormIncrementPlugin.PLUGIN_NAME ) );
+        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( this.getId(  ) );
 
         if ( config != null )
         {

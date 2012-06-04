@@ -33,11 +33,9 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.formincrement.business;
 
-import fr.paris.lutece.portal.service.plugin.Plugin;
+import fr.paris.lutece.plugins.workflow.modules.formincrement.service.FormIncrementPlugin;
+import fr.paris.lutece.plugins.workflowcore.business.config.ITaskConfigDAO;
 import fr.paris.lutece.util.sql.DAOUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -45,7 +43,7 @@ import java.util.List;
  * class TaskFormIncrementConfigDAO
  *
  */
-public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
+public class TaskFormIncrementConfigDAO implements ITaskConfigDAO<TaskFormIncrementConfig>
 {
     private static final String SQL_QUERY_FIND_BY_PRIMARY_KEY = "SELECT id_task,id_information " +
         "FROM task_form_increment_cf  WHERE id_task=?";
@@ -54,15 +52,14 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
     private static final String SQL_QUERY_UPDATE = "UPDATE task_form_increment_cf " + "SET id_task=?,id_information=?" +
         " WHERE id_task=?";
     private static final String SQL_QUERY_DELETE = "DELETE FROM task_form_increment_cf WHERE id_task=? ";
-    private static final String SQL_QUERY_FIND_ALL = "SELECT id_task,id_information " + "FROM task_form_increment_cf";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public synchronized void insert( TaskFormIncrementConfig config, Plugin plugin )
+    public synchronized void insert( TaskFormIncrementConfig config )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, FormIncrementPlugin.getPlugin(  ) );
 
         int nPos = 0;
 
@@ -77,9 +74,9 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public void store( TaskFormIncrementConfig config, Plugin plugin )
+    public void store( TaskFormIncrementConfig config )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, FormIncrementPlugin.getPlugin(  ) );
 
         int nPos = 0;
 
@@ -95,10 +92,10 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public TaskFormIncrementConfig load( int nIdTask, Plugin plugin )
+    public TaskFormIncrementConfig load( int nIdTask )
     {
         TaskFormIncrementConfig config = null;
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_BY_PRIMARY_KEY, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_BY_PRIMARY_KEY, FormIncrementPlugin.getPlugin(  ) );
 
         daoUtil.setInt( 1, nIdTask );
 
@@ -122,38 +119,12 @@ public class TaskFormIncrementConfigDAO implements ITaskFormIncrementConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public void delete( int nIdState, Plugin plugin )
+    public void delete( int nIdState )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, FormIncrementPlugin.getPlugin(  ) );
 
         daoUtil.setInt( 1, nIdState );
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<TaskFormIncrementConfig> loadAll( Plugin plugin )
-    {
-        List<TaskFormIncrementConfig> configList = new ArrayList<TaskFormIncrementConfig>(  );
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_ALL, plugin );
-
-        daoUtil.executeQuery(  );
-
-        int nPos = 0;
-
-        if ( daoUtil.next(  ) )
-        {
-            TaskFormIncrementConfig config = new TaskFormIncrementConfig(  );
-            config.setIdTask( daoUtil.getInt( ++nPos ) );
-
-            configList.add( config );
-        }
-
-        daoUtil.free(  );
-
-        return configList;
     }
 }

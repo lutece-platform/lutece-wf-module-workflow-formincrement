@@ -34,16 +34,9 @@
 package fr.paris.lutece.plugins.workflow.modules.formincrement.web;
 
 import fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormIncrementConfig;
-import fr.paris.lutece.plugins.workflow.modules.formincrement.service.FormIncrementPlugin;
-import fr.paris.lutece.plugins.workflow.modules.formincrement.service.ITaskFormIncrementConfigService;
-import fr.paris.lutece.plugins.workflow.utils.WorkflowUtils;
+import fr.paris.lutece.plugins.workflow.web.task.NoFormTaskComponent;
+import fr.paris.lutece.plugins.workflowcore.service.config.ITaskConfigService;
 import fr.paris.lutece.plugins.workflowcore.service.task.ITask;
-import fr.paris.lutece.plugins.workflowcore.web.task.NoFormTaskComponent;
-import fr.paris.lutece.portal.service.i18n.I18nService;
-import fr.paris.lutece.portal.service.message.AdminMessage;
-import fr.paris.lutece.portal.service.message.AdminMessageService;
-import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.html.HtmlTemplate;
@@ -55,6 +48,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,68 +67,13 @@ public class FormIncrementTaskComponent extends NoFormTaskComponent
     private static final String MARK_CONFIG = "config";
     private static final String MARK_INFORMATION_LIST = "information_list";
 
-    // PARAMETERS
-    private static final String PARAMETER_INFORMATION_COMPLEMENTARY = "id_information";
-
-    // FIELDS
-    private static final String FIELD_INFORMATION_COMPLEMENTARY = "module.workflow.formincrement.task_form_increment_config.label_task_information";
-
-    // MESSAGES
-    private static final String MESSAGE_MANDATORY_FIELD = "module.workflow.formincrement.message.mandatory.field";
+    // BEANS
+    private static final String BEAN_TASK_CONFIG_SERVICE = "workflow-formincrement.taskFormIncrementConfigService";
 
     // SERVICES
     @Inject
-    private ITaskFormIncrementConfigService _taskFormIncrementConfigService;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String doSaveConfig( HttpServletRequest request, Locale locale, ITask task )
-    {
-        String strIdInformationComplementary = request.getParameter( PARAMETER_INFORMATION_COMPLEMENTARY );
-
-        int nIdInformationComplementary = Integer.parseInt( strIdInformationComplementary );
-
-        String strError = WorkflowUtils.EMPTY_STRING;
-
-        if ( nIdInformationComplementary == -1 )
-        {
-            strError = FIELD_INFORMATION_COMPLEMENTARY;
-        }
-
-        if ( !strError.equals( WorkflowUtils.EMPTY_STRING ) )
-        {
-            Object[] tabRequiredFields = { I18nService.getLocalizedString( strError, locale ) };
-
-            return AdminMessageService.getMessageUrl( request, MESSAGE_MANDATORY_FIELD, tabRequiredFields,
-                AdminMessage.TYPE_STOP );
-        }
-
-        Plugin plugin = PluginService.getPlugin( FormIncrementPlugin.PLUGIN_NAME );
-        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( task.getId(  ), plugin );
-        Boolean bCreate = false;
-
-        if ( config == null )
-        {
-            config = new TaskFormIncrementConfig(  );
-            config.setIdTask( task.getId(  ) );
-            bCreate = true;
-        }
-
-        config.setIdInformationComplementary( nIdInformationComplementary );
-
-        if ( bCreate )
-        {
-            _taskFormIncrementConfigService.create( config, plugin );
-        }
-        else
-        {
-            _taskFormIncrementConfigService.update( config, plugin );
-        }
-
-        return null;
-    }
+    @Named( BEAN_TASK_CONFIG_SERVICE )
+    private ITaskConfigService _taskFormIncrementConfigService;
 
     /**
      * {@inheritDoc}
@@ -143,8 +82,7 @@ public class FormIncrementTaskComponent extends NoFormTaskComponent
     public String getDisplayConfigForm( HttpServletRequest request, Locale locale, ITask task )
     {
         Map<String, Object> model = new HashMap<String, Object>(  );
-        Plugin plugin = PluginService.getPlugin( FormIncrementPlugin.PLUGIN_NAME );
-        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskFormIncrementConfig config = _taskFormIncrementConfigService.findByPrimaryKey( task.getId(  ) );
 
         ReferenceList informationlist = new ReferenceList(  );
         informationlist.addItem( -1, StringUtils.EMPTY );

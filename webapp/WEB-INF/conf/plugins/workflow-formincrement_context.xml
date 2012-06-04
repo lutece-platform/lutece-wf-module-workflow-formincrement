@@ -22,12 +22,16 @@
 		p:key="taskFormIncrement"
 		p:titleI18nKey="module.workflow.formincrement.task_form_increment_title"
 		p:beanName="workflow-formincrement.taskFormIncrement"
+		p:configBeanName="workflow-formincrement.taskFormIncrementConfig"
 		p:configRequired="true"
 		p:taskForAutomaticAction="true" />
 	<bean id="workflow-formincrement.taskFormIncrement" class="fr.paris.lutece.plugins.workflow.modules.formincrement.service.TaskFormIncrement" scope="prototype" />
+	<bean id="workflow-formincrement.taskFormIncrementConfig" class="fr.paris.lutece.plugins.workflow.modules.formincrement.business.TaskFormIncrementConfig" scope="prototype" />
 	<bean id="workflow-formincrement.formIncrementTaskComponent" class="fr.paris.lutece.plugins.workflow.modules.formincrement.web.FormIncrementTaskComponent"
-		p:taskType-ref="workflow-formincrement.taskTypeFormIncrement" />
+		p:taskType-ref="workflow-formincrement.taskTypeFormIncrement"
+		p:taskConfigService-ref="workflow-formincrement.taskFormIncrementConfigService" />
 		
 	<!-- Services -->
-	<bean id="workflow-formincrement.taskFormIncrementConfigService" class="fr.paris.lutece.plugins.workflow.modules.formincrement.service.TaskFormIncrementConfigService" />
+	<bean id="workflow-formincrement.taskFormIncrementConfigService" class="fr.paris.lutece.plugins.workflowcore.service.config.TaskConfigService"
+		p:taskConfigDAO-ref="workflow-formincrement.taskFormIncrementConfigDAO" />
 </beans>

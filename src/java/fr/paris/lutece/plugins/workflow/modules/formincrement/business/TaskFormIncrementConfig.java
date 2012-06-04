@@ -33,33 +33,22 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.formincrement.business;
 
+import fr.paris.lutece.plugins.workflowcore.business.config.TaskConfig;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 
 /**
  *
  * TaskFormIncrementConfig
  *
  */
-public class TaskFormIncrementConfig
+public class TaskFormIncrementConfig extends TaskConfig
 {
-    private int _nIdTask;
+    @NotNull
+    @Min( 1 )
     private int _nIdInformationComplementary;
-
-    /**
-     * @return id Task
-     */
-    public int getIdTask(  )
-    {
-        return _nIdTask;
-    }
-
-    /**
-     * set id Task
-     * @param idTask id task
-     */
-    public void setIdTask( int idTask )
-    {
-        _nIdTask = idTask;
-    }
 
     /**
      * @return id Entry directory Email
