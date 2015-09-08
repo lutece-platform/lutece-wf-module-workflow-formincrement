@@ -2,7 +2,7 @@
     <!-- Plugin Informations -->
     <name>workflow-formincrement</name>
     <class>fr.paris.lutece.plugins.workflow.modules.formincrement.service.FormIncrementPlugin</class>
-    <version>2.0.0</version>
+    <version>2.0.1-SNAPSHOT</version>
     <documentation/>
     <installation/>
     <changes/>
