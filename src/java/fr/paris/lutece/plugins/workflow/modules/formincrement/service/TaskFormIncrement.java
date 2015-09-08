@@ -122,7 +122,7 @@ public class TaskFormIncrement extends SimpleTask
 
                     try
                     {
-                        if ( ( counter == null ) || counter.equals( FormUtils.EMPTY_STRING ) )
+                        if ( ( counter == null ) || counter.equals( "" ) )
                         {
                             counter = "1";
                         }
